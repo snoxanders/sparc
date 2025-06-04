@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { Box } from '@mui/material';
 import type { NextPage } from 'next';
-import ToDoContainer from '../../components/ToDoContainer';
+import ToDoContainer from '@/components/ToDoContainer';
 
 const Home: NextPage = () => {
   return (
