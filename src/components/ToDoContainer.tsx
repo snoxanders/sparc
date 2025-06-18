@@ -18,7 +18,7 @@ interface IFormInputsWithId extends IFormInputs {
   id: number;
 }
 
-export default function ToDoContainer(){
+export default function ToDoContainer() {
   const [tasks, setTasks] = useState<IFormInputsWithId[]>([]);
   const [editingTask, setEditingTask] = useState<IFormInputsWithId | null>(null);
   const [open, setOpen] = useState<boolean>(false);
@@ -65,6 +65,13 @@ export default function ToDoContainer(){
 
     setOpen(false);
   };
+
+  const formattedTask = editingTask
+    ? {
+        ...editingTask,
+        date: editingTask.date ? new Date(editingTask.date) : new Date(),
+      }
+    : undefined;
 
   const columns: GridColDef[] = [
     { field: 'taskName', headerName: 'Activity Name', flex: 1 },
@@ -154,7 +161,7 @@ export default function ToDoContainer(){
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{editingTask ? 'Edit Task' : 'Add a New Task'}</DialogTitle>
           <DialogContent>
-            <TaskForm onSubmit={handleFormSubmit} defaultValues={editingTask || undefined} />
+            <TaskForm onSubmit={handleFormSubmit} defaultValues={formattedTask} />
           </DialogContent>
         </Dialog>
 
